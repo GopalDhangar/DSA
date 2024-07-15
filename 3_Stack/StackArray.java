@@ -9,7 +9,6 @@ AStack(int n)
    st=new int[size];
 }
 
-int t;
 void push(int x)
 {
 if(top==size-1)
