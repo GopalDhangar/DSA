@@ -4,10 +4,12 @@ public class findItinerary {
 
     public static String getStart(HashMap<String, String> tick) {
         HashMap<String, String> revMap = new HashMap<>();
+        
         // Swap Key and Values
         for (String key : tick.keySet()) {
             revMap.put(tick.get(key), key);
         }
+        
         // Return key which did not Match With the rev key
         for (String key : tick.keySet()) {
             if (!revMap.containsKey(key))
