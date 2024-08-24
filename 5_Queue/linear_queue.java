@@ -1,82 +1,70 @@
-class Aqueue{
-int q[];
-int front,rear;
-int size;
-Aqueue(int N)
-{
-size=N;
-front=-1;
-rear=-1;
-q=new int[size];
-}
+public class LinearQueue {
 
-void enqueue(int x){
-if(rear==size-1)
-  System.out.println("jgdehdfg");
-else{
-if(front==-1)
-front=rear=0;
-else
-rear++;
-q[rear]=x;
-}
-}
+    static class Queue {
+        static int size;
+        static int arr[];
+        static int rear = -1;
 
-void peek(){
-if(front==-1)
-System.out.println("queue is empty : ");
-else
-System.out.println("peek element:"+ q[0]);
-}
+        // Constructor to create Queue
+        Queue(int n) {
+            arr = new int[n];
+            this.size = n;
+        }
 
-int Count(){
-int count;
-if(front==-1)
-count=0;
-else
-count=rear+1;
-return count;
-}
+        // Method to check whether the Queue is empty or not
+        public boolean isEmpty() {
+            return rear == -1;
+        }
 
-void dequeue(){
-if(front==-1)
-System.out.println("underflow :");
-else{
-int t=q[front];
-front++;
-}
-}
+        // ENQUEUE
+        public void enqueue(int data) {
+            if (rear == (size - 1))
+                System. out.println("Queue is Full");
+            else {
+                rear++;
+                arr[rear] = data;
+            }
+        }
 
+        // DEQUEUE
+        public int dequeue() {
+            if (isEmpty()) {
+                System. out.println("Queue is already Empty");
+                return -1;
+            } else {
+                int front = arr[0];
+              
+                // SHIFTING AFTER DELETE FRONT
+                for (int i = 0; i < rear; i++) {
+                    arr[i] = arr[i + 1];
+                }
+                rear--;
+                return front;
 
+            }
+        }
 
-void display()
-{
-if(front==-1)
-System.out.println("underflow: ");
-else{
-for(int i=front;i<=rear;i++)
-{
-  System.out.print(q[i]+" ");
-}
-}
-System.out.println();
-}
-}
+        // Method to return peek element
+        public int peek() {
+            if (isEmpty()) {
+                System. out.println("Queue is empty");
+                return -1;
+            } else {
+                return arr[0];
 
-class linear_queue{
-public static void main(String ...k){
-Aqueue obj=new Aqueue(10);
-obj.enqueue(10);
-obj.enqueue(20);
-obj.enqueue(30);
-obj.enqueue(40);
-obj.enqueue(50);
-obj.display();
-obj.peek();
-int ans=obj.Count();
-System.out.println("Count is: "+ans);
-obj.dequeue();
-obj.display();
+            }
 
-}
+        }
+    }
+
+    public static void main(String[] args) {
+        Queue q = new Queue(5);
+        q.enqueue(34);
+        q.enqueue(45);
+        q.enqueue(23);
+        while (!q.isEmpty()) {
+            System.out.println(q.dequeue());
+        }
+
+    }
 }
