@@ -1,88 +1,69 @@
-class Node{
-   int data;
-Node next;
-Node(int x){
-   data=x;
-   next=null;
-}
-}
- class Queue
-{
-   Node front;
-        Queue(){
-       front=null;
-     }
+//queue using Linked List
 
- void enque(int value){
-  Node rear=new Node(value);
-  if(front==null){
-   front=rear;
-}
-else{
- Node temp=front;
-while(temp.next!=null){
-temp=temp.next;
-}
-temp.next=rear;
-}
-}
+public class LinkedList_Queue {
+    static class Node {
+        int data;
+        Node next;
 
-void display(){
-   if(front== null)
-   System.out.println("Queue is empty: ");
-   else{
-   Node temp=front;
-   while(temp!=null){
-   System.out.print(temp.data+" ");
-  temp=temp.next;
-  }
-}
-  System.out.println();
-  }
+        Node(int data) {
+            this.data = data;
+            next = null;
+        }
+    }
 
-int  Size(){
- int count=0;
- Node temp=front;
- while(temp!=null){
-  count++;
- temp=temp.next;
-}
- return count;
-}
+    static class Queue {
+        static Node head = null;
+        static Node tail = null;
 
-void dequeue(){
-if(front==null)
- System.out.println("Queue is already empty: ");
-else{
- Node temp=front;
- front=front.next;
- temp=null;
-}
-}
+        public boolean isEmpty() {
+            return head == null && tail == null;
+        }
 
- void peak(){
-if(front==null)
- System.out.println("Quque is empty: ");
-else
-System.out.println(front.data);
-}
-}
+        public void add(int data) {
+            Node newNode = new Node(data);
+            if (isEmpty()) {
+                tail = head = newNode;
+            } else {
+                tail.next = newNode;
+                tail = newNode;
+            }
+        }
 
+        public int remove() {
+            if (isEmpty()) {
+                System.out.println("empty queue");
+                return -1;
+            }
+            int front = head.data;
+            // single node
+            if (head == tail) {
+                tail = null;
+            }
+            head = head.next;
+            return front;
+        }
 
-class Queue_1{
-   public static void main(String ...k){
-    Queue obj=new Queue();
-    obj.enque(50);
-    obj.enque(40);
-     obj.enque(60);
-     obj.enque(70);
-     obj.display();
-    int size=obj.Size();
-   System.out.println("Size: "+size);
-    System.out.print("peak value: ");
-    obj.peak();
-    System.out.print("Afte dequeue: ");
-    obj.dequeue();
-   obj.display();
-  }
+        public int peek() {
+            if (isEmpty()) {
+                System.out.println("empty queue");
+                return -1;
+            }
+
+            return head.data;
+        }
+    }
+
+    public static void main(String args[]) {
+        Queue q = new Queue();
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        q.add(4);
+        q.add(5);
+
+        while (!q.isEmpty()) {
+            System.out.println(q.peek());
+            q.remove();
+        }
+    }
 }
