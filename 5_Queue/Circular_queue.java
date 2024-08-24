@@ -1,83 +1,80 @@
-class Cqueue{
-int   cq[];
-int size;
-int front,rear;
-Cqueue(int n){
-size=n;
-front=-1;
-rear=-1;
-cq=new int[size];
-}
+//circular queue using array
 
-void enqueue(int x){
-if((front==0 && rear==size-1) || rear==front-1)
-System.out.println("Circcular Queueu is overflow: ");
-else
-{
-         if(front==-1){
-        front=0;
-        rear=0;
-     }
-else if(rear==size-1)
-{
-rear=0;
-}
-else{
-rear++;
-}
-}
-cq[rear]=x;
-}
+public class Circular_queue {
+    static class Queue {
+        static int arr[];
+        static int size;
+        static int front = -1;
+        static int rear = -1;
 
-void dequeue(){
-if(front==-1 )
-System.out.println("queue is alredy empty: ");
-else{
-      int t=cq[front];
-     System.out.println("deleted value is : "+t);
-    if(front==rear){
-   front=-1;
-rear=-1;
-}
-else if(front==size-1){
-front=0;
-}
-else{
-front++;
-}
-}
-}
+        Queue(int size) {
+            this.size = size;
+            arr = new int[size];
+        }
 
-void display(){
-if(front==-1)
-System.out.println("Queue is empty: ");
-else
-{
-if(rear<front){
-  for(int i=front;i<=size-1;i++)
-System.out.print(cq[i]+" ");
-for(int i=0;i<=rear;i++)
-System.out.print(cq[i]);
-}
-else{
-for(int i=front;i<=rear;i++)
-System.out.print(cq[i]+ " ");
-}
-}
-System.out.println();
-}
-}
+        public boolean isEmpty() {
+            return rear == -1 && front == -1;
+        }
 
-class Circular_queue{
-public static void main(String ...k){
-Cqueue obj=new Cqueue(5);
-obj.enqueue(90);
-obj.enqueue(80);
-obj.enqueue(60);
-obj.enqueue(20);
-obj.enqueue(10);
-obj.display();
-obj.dequeue();
-//obj.display();
-}
+        public boolean isFull() {
+            return (rear + 1) % size == front;
+        }
+
+        public void add(int data) {
+            if (isFull()) {
+                System.out.println("Overflow");
+                return;
+            }
+            // if it's the 1st element
+            if (front == -1) {
+                front = 0;
+            }
+
+            rear = (rear + 1) % size;
+            arr[rear] = data;
+        }
+
+        public int remove() {
+            if (isEmpty()) {
+                System.out.println("empty queue");
+                return -1;
+            }
+            int res = arr[front];
+
+            // if only 1 element is present
+            if (front == rear) {
+                front = rear = -1;
+            } else {
+                front = (front + 1) % size;
+            }
+
+            return res;
+        }
+
+        public int peek() {
+            if (isEmpty()) {
+                System.out.println("empty queue");
+                return -1;
+            }
+            return arr[front];
+        }
+    }
+
+    public static void main(String args[]) {
+        Queue q = new Queue(5);
+        q.add(1);
+        q.add(2);
+        q.add(3);
+        q.add(4);
+        q.add(5);
+        System.out.println(q.remove());
+        q.add(6);
+        System.out.println(q.remove());
+        q.add(7);
+        System.out.println("after delete 1 and 2 and add 6 And 7");
+
+        while (!q.isEmpty()) {
+            System.out.println(q.remove());
+        }
+    }
 }
