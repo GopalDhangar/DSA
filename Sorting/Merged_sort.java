@@ -1,11 +1,13 @@
 public class Merged_sort {
 
     // Conquer the Array
+    //nlogn
     public void conquer(int[] arr, int start, int mid, int last) {
         int[] merged = new int[last - start + 1];
         int idx1 = start;
         int idx2 = mid + 1;
         int x = 0;
+        // O(n)
         while (idx1 <= mid && idx2 <= last) {
             if (arr[idx1] <= arr[idx2]) {
                 merged[x++] = arr[idx1++];
@@ -28,6 +30,7 @@ public class Merged_sort {
     public void divide(int[] arr, int start, int last) {
         if (start >= last)
             return;
+        //O(logn)
         int mid = start + (last - start) / 2;
         divide(arr, start, mid);
         divide(arr, mid + 1, last);
