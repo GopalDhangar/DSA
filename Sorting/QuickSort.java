@@ -1,6 +1,7 @@
 public class QuickSort {
 
     // partition program to find less than and greater than pivot
+    
     static int partition(int[] arr, int start, int last) {
         int pivot = arr[last];
         int i = start - 1;// index of new elements
@@ -12,8 +13,8 @@ public class QuickSort {
                 arr[j] = temp;
             }
         }
-        // After set all elements less than pivot,put pivot on next index so that all
-        // elements greater than set automatically after pivot
+        // After set all elements less than pivot,put pivot on next index so that all elements greater than set automatically after pivot
+        
         i++;
         int temp = arr[i];
         arr[i] = pivot;
@@ -22,13 +23,13 @@ public class QuickSort {
     }
 
     // divide the array into two array parts before and after pivot index
+    
     static void quickSort(int[] arr, int start, int last) {
         if (start < last) {
             int pivot_index = partition(arr, start, last);
             quickSort(arr, start, pivot_index - 1);
             quickSort(arr, pivot_index + 1, last);
         }
-
     }
 
     public static void main(String[] args) {
